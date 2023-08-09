@@ -1,6 +1,9 @@
 <?php
 require_once('../db/config.php');
 
+// Iniciar la sesión
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar si se han recibido los campos de email y password
     if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -13,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (empty($errorMessages)) {
             try {
-                $stmt = $conn->prepare('SELECT id_user, name, email, password, rol FROM users WHERE email = :email');
+                $stmt = $conn->prepare('SELECT email, password, rol FROM users WHERE email = :email');
 
                 $stmt->execute(array(
                     ':email' => $email
@@ -26,14 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Verificar la contraseña
                     if ($password == $data['password']) {
                         // Inicio de sesión exitoso
-                        $_SESSION['id_user'] = $data['id_user'];
-                        $_SESSION['nombre'] = $data['name'];
                         $_SESSION['email'] = $data['email'];
-                        $_SESSION['password'] = $data['password'];
                         $_SESSION['rol'] = $data['rol'];
 
                         // Redireccionar según el rol
-                        $errorMessages[] = $data['rol'];
+                       $errorMessages[] = $data['rol'];
                     } else {
                         // Contraseña incorrecta el 1 es para que se muestre el error en el frontend en el notify en el if
                         $errorMessages[] = 0;
@@ -58,3 +58,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Si la petición no es de tipo POST
     echo "Error: Petición HTTP inesperada.";
 }
+?>

@@ -36,18 +36,22 @@ class RowsAjax {
     this._addListeners();
     this._extend();
     this._initBootstrapModal();
+    const self = this;
+
+    this.redirectToDetailPage = (id_patient) => {
+      window.location.href = 'Results.Detail.php?id_patient=' + id_patient;
+    };
   }
 
-  // Creating datatable instance. Table data is provided by json/products.json file and loaded via ajax
   _createInstance() {
     const _this = this;
     this._datatable = jQuery('#datatableRowsAjax').DataTable({
       scrollX: true,
       buttons: ['copy', 'excel', 'csv', 'print'],
       info: false,
-      ajax: '../../backend/php/GetPacientes.php', // Cambiar '/ruta/de/obtener' por la ruta adecuada en tu servidor
-      order: [], // Clearing default order
-      sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>', // Hiding all other dom elements except table and pagination
+      ajax: '../../backend/php/GetPacientes.php',
+      order: [],
+      sDom: '<"row"<"col-sm-12"<"table-container"t>r>><"row"<"col-12"p>>',
       pageLength: 10,
       columns: [
         {
@@ -59,10 +63,9 @@ class RowsAjax {
         {data: 'phone'},
         {data: 'email'},
         {
-          // Nueva columna para el botón
           data: null,
-          render: function (data, type, row) {
-            return '<a class="btn btn-outline-primary btn-sm" href="' + data.ExpedienteURL + '">Expediente</a>';
+          render: (data, type, row) => {
+            return '<button class="btn btn-outline-primary btn-sm" onclick="location.href = Results.Detail.php">Detalles</button>';
           },
         },
       ],
@@ -72,6 +75,7 @@ class RowsAjax {
           next: '<i class="cs-chevron-right"></i>',
         },
       },
+
       initComplete: function (settings, json) {
         _this._setInlineHeight();
       },

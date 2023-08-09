@@ -110,24 +110,6 @@
                 </a>
             </li>
             <li>
-                <a href="Consult.html">
-                    <i data-acorn-icon="messages" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Chats</span>
-                </a>
-            </li>
-            <li>
-                <a href="Guidebook.html">
-                    <i data-acorn-icon="book-open" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Terminos y condiciones</span>
-                </a>
-            </li>
-            <li>
-                <a href="Articles.html">
-                    <i data-acorn-icon="book" class="icon" data-acorn-size="18"></i>
-                    <span class="label">Articulos</span>
-                </a>
-            </li>
-            <li>
                 <a href="Settings.html">
                     <i data-acorn-icon="gear" class="icon" data-acorn-size="18"></i>
                     <span class="label">Usuarios</span>

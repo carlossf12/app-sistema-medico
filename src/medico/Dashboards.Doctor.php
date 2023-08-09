@@ -1,27 +1,50 @@
 <?php
-session_start();  
+session_start();
 if (@empty($_SESSION['email'])) {
-      header('Location: ../login.php');
-      exit;
-  };
-  $email = $_SESSION['email'];
-  require_once('../../backend/db/config.php');
-  $stmt = $conn->prepare('SELECT name, email, password, rol FROM users WHERE email = :email');
-  $stmt->execute(array(
-    ':email' => $email
-  ));
-  $data = $stmt->fetch(PDO::FETCH_ASSOC);
-  $nombre = $data['name'];
-  $rol = $data['rol'];
+  header('Location: ../login.php');
+  exit;
+};
+$email = $_SESSION['email'];
+require_once('../../backend/db/config.php');
+$stmt = $conn->prepare('SELECT u.name,
+  u.email, 
+  u.password, 
+  u.rol,
+  r.description as rolName
+FROM users u
+INNER JOIN roles r 
+ON u.rol = r.id_rol
+WHERE u.email = :email');
+$stmt->execute(array(
+  ':email' => $email
+));
+$data = $stmt->fetch(PDO::FETCH_ASSOC);
+$nombre = $data['name'];
+$rol = $data['rol'];
+$rolName = $data['rolName'];
 
-  require_once('../layouts/headerAdmin.php'); 
+// Obtener la hora actual en formato de 24 horas (0-23)
+$hora_actual = date('G');
+// Definir los rangos horarios para los mensajes
+$mensaje_manana = "Buenos días";
+$mensaje_tarde = "Buenas tardes";
+$mensaje_noche = "Buenas noches";
+// Determinar el mensaje según la hora
+if ($hora_actual >= 5 && $hora_actual < 12) {
+  $mensaje = $mensaje_manana;
+} elseif ($hora_actual >= 12 && $hora_actual < 18) {
+  $mensaje = $mensaje_tarde;
+} else {
+  $mensaje = $mensaje_noche;
+};
+
+require_once('../layouts/headerAdmin.php');
 ?>
 <div id="root">
   <div id="nav" class="nav-container d-flex">
-    <?php include_once('../layouts/navAdmin.php'); ?>
+    <?php include_once('../layouts/navMedico.php'); ?>
     <div class="nav-shadow"></div>
   </div>
-
   <main>
     <div class="container">
       <!-- Title and Top Buttons Start -->
@@ -30,7 +53,7 @@ if (@empty($_SESSION['email'])) {
           <!-- Title Start -->
           <div class="col-12 col-md-7">
             <span class="align-middle text-muted d-inline-block lh-1 pb-2 pt-2 text-small">Home</span>
-            <h1 class="mb-0 pb-0 display-4" id="title">Good morning, <?php echo $email; ?>!</h1>
+            <h1 class="mb-0 pb-0 display-4" id="title"><?php echo $mensaje . ", " . $nombre; ?>!</h1>
           </div>
           <!-- Title End -->
         </div>

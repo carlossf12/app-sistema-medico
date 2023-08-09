@@ -72,9 +72,9 @@ class AuthLogin {
             } else if (response == 1) {
               window.location.href = 'admin/Dashboards.Admin.php';
             } else if (response == 2) {
-              window.location.href = 'medico/Dashboards.Doctor.html';
+              window.location.href = 'medico/Dashboards.Doctor.php';
             } else if (response == 3) {
-              window.location.href = 'paciente/Dashboards.Patient.html';
+              window.location.href = 'paciente/Dashboards.Patient.php';
             } else {
               jQuery.notify(
                 {title: response, message: '¡Por favor, inténtelo otra vez!', icon: 'cs-user'},

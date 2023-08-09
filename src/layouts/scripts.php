@@ -41,14 +41,22 @@
 <script src="../js/cs/charts.extend.js"></script>
 <script src="../js/pages/dashboards.doctor.js"></script>
 <script src="../js/cs/datatable.extend.js"></script>
-<script src="../js/plugins/datatable_Specialty_Ajax.js"></script>
+<!--<script src="../js/plugins/datatable_Specialty_Ajax.js"></script>
+<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>-->
 <script src="../js/plugins/viewImg.js"></script>
+<script src="../js/plugins/viewFile.js"></script>
 
 <script src="../js/forms/layouts.js"></script>
 <script src="../js/components/toasts.js"></script>
 <script src="../js/plugins/notifies.js"></script>
 
 <script src="../js/pages/doctors.js"></script>
+<script src="../js/pages/doctors.detail.js"></script>
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
 
 <script src="../js/common.js"></script>
 <script src="../js/scripts.js"></script>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-footer="true">
+<html lang="es" data-footer="true">
 
 <head>
     <meta charset="UTF-8" />
@@ -48,6 +48,7 @@
     <!-- Vendor Styles End -->
     <!-- Template Base Styles Start -->
     <link rel="stylesheet" href="../css/styles.css" />
+    <!--<link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />-->
     <!-- Template Base Styles End -->
 
     <link rel="stylesheet" href="../css/main.css" />
